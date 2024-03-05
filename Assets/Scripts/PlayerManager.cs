@@ -13,6 +13,9 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] private float speed = 7f;
     [SerializeField] private float jumpSpeed = 7f;
+
+    [SerializeField] private GameObject enemy1;
+
     private float dirX;
 
     private int lifes;
@@ -40,6 +43,8 @@ public class PlayerManager : MonoBehaviour {
     void Update() {
         UpdateMovement();
         UpdateAnimator();
+
+        Debug.Log(Vector2.Distance(transform.position, enemy1.transform.position));
 
         //HACK!
         if (Input.GetKeyDown(KeyCode.P)){
