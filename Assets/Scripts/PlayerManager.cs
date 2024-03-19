@@ -44,8 +44,6 @@ public class PlayerManager : MonoBehaviour {
         UpdateMovement();
         UpdateAnimator();
 
-        Debug.Log(Vector2.Distance(transform.position, enemy1.transform.position));
-
         //HACK!
         if (Input.GetKeyDown(KeyCode.P)){
             rb.bodyType = RigidbodyType2D.Static;
