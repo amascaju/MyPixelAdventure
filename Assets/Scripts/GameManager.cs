@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,10 @@ public class GameManager : MonoBehaviour {
     public bool isLevelRestarted = false;
     public bool isLevelCompleted = false;
     public bool isGameCompleted = false;
+
+
+    [SerializeField] private GameObject pFinish;
+    [SerializeField] private TextMeshProUGUI textWin;
 
     void Start()  {
         //SOUNDMANAGER
@@ -34,12 +39,9 @@ public class GameManager : MonoBehaviour {
 
     void OnGUI() {
         if (isGameCompleted || isGameOver) {
-            GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
-            myButtonStyle.fontSize = 30;
-            if ( GUI.Button(new Rect(Screen.width/2-Screen.width/8, Screen.height/2-Screen.height/8, Screen.width/4, Screen.height/4), isGameCompleted?"CONGRATULATIONS!!":"GAMEOVER!!", myButtonStyle)) {
-                Reset();
-                SceneManager.LoadScene(1);
-            }
+            textWin.text = isGameCompleted ? "CONGRATULATIONS!!" : "GAMEOVER!!";
+            pFinish.SetActive(true);
+            Reset();
         }
     }
 
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void CompleteLevel() {
-        if (SceneManager.GetActiveScene().name == "Level3"){
+        if (SceneManager.GetActiveScene().name == "Level1"){
             isGameCompleted = true;
         } else {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
